@@ -13,6 +13,21 @@ Provision Let's Encrypt TLS certificates using dns-01 challenge for Cloudflare a
 
 ## Setup
 
+#### Prepare k8s secret
+
+We create an empty k8s secret that will be filled in by the `cf-letsencrypt` job.
+
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: letsencrypt-certs
+  namespace: default
+type: Opaque
+EOF
+```
+
 #### RBAC
 
 ```
@@ -49,7 +64,7 @@ EOF
 
 #### One-time Job
 
-Store your Cloudflare email and API key in the `cloudflare` k8s Secret and create a k8s Job that will provision Let's Encrypt TLS certs for `DOMAINS`, registered with `LE_EMAIL` and save into the `SECRET` k8s Secret.
+Store your Cloudflare email and API key in the `cloudflare` k8s Secret and create a k8s Job that will provision Let's Encrypt TLS certs for `DOMAINS`, registered with `LE_EMAIL` and save into the `SECRET` k8s Secret that we prepared above.
 
 ```
 cat <<EOF | kubectl apply -f -

@@ -34,7 +34,7 @@ cat /secret-template.json | \
 
 ls /secret-patch.json || exit 1
 
-curl -v -k --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -XPOST \
+curl -v -k --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -XPATCH \
   -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
   -H "Accept: application/json, */*" \
   -H "Content-Type: application/strategic-merge-patch+json" \
