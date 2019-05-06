@@ -80,7 +80,7 @@ spec:
       serviceAccountName: cf-letsencrypt
       containers:
       - name: cf-letsencrypt
-        image: quay.io/adrianchifor/k8s-cf-letsencrypt
+        image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
         imagePullPolicy: Always
         restartPolicy: Never
         resources:
@@ -146,7 +146,7 @@ spec:
           serviceAccountName: cf-letsencrypt
           containers:
           - name: cf-letsencrypt
-            image: quay.io/adrianchifor/k8s-cf-letsencrypt
+            image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
             imagePullPolicy: Always
             restartPolicy: Never
             resources:
