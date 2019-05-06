@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [[ -z $DOMAINS || -z $LE_EMAIL || -z $CF_API_EMAIL || -z $CF_API_KEY || -z $SECRET ]]; then
-	echo "DOMAINS, LE_EMAIL, CF_API_EMAIL, CF_API_KEY, SECRET environment variables required"
-	exit 1
+  echo "DOMAINS, LE_EMAIL, CF_API_EMAIL, CF_API_KEY, SECRET environment variables required"
+  exit 1
 fi
 
 CURRENT_NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
@@ -26,11 +26,11 @@ CERTPATH=/etc/letsencrypt/live/$(echo ${DOMAINS} | cut -f1 -d',')
 ls ${CERTPATH} || exit 1
 
 cat /secret-template.json | \
-	sed "s/NAMESPACE/${NAMESPACE}/" | \
-	sed "s/NAME/${SECRET}/" | \
-	sed "s/TLSCERT/$(cat ${CERTPATH}/fullchain.pem | base64 | tr -d '\n')/" | \
-	sed "s/TLSKEY/$(cat ${CERTPATH}/privkey.pem | base64 | tr -d '\n')/" \
-	> /secret-patch.json
+  sed "s/NAMESPACE/${NAMESPACE}/" | \
+  sed "s/NAME/${SECRET}/" | \
+  sed "s/TLSCERT/$(cat ${CERTPATH}/fullchain.pem | base64 | tr -d '\n')/" | \
+  sed "s/TLSKEY/$(cat ${CERTPATH}/privkey.pem | base64 | tr -d '\n')/" \
+  > /secret-patch.json
 
 ls /secret-patch.json || exit 1
 
