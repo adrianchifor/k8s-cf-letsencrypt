@@ -78,11 +78,11 @@ spec:
         app: cf-letsencrypt
     spec:
       serviceAccountName: cf-letsencrypt
+      restartPolicy: Never
       containers:
       - name: cf-letsencrypt
         image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
         imagePullPolicy: Always
-        restartPolicy: Never
         resources:
           requests:
             cpu: 10m
@@ -144,11 +144,11 @@ spec:
             app: cf-letsencrypt
         spec:
           serviceAccountName: cf-letsencrypt
+          restartPolicy: Never
           containers:
           - name: cf-letsencrypt
             image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
             imagePullPolicy: Always
-            restartPolicy: Never
             resources:
               requests:
                 cpu: 10m
@@ -178,6 +178,7 @@ EOF
 A common way to use the provisioned TLS certs k8s secret is with ingress controllers like:
 
 ```
+cat <<EOF | kubectl apply -f -
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -195,4 +196,5 @@ spec:
     - hosts:
       - example.com
       secretName: letsencrypt-certs
+EOF
 ```
