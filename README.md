@@ -1,5 +1,7 @@
 # k8s-cf-letsencrypt
 
+[![Docker](https://github.com/adrianchifor/k8s-cf-letsencrypt/workflows/Publish%20Docker/badge.svg)](https://github.com/adrianchifor/k8s-cf-letsencrypt/actions?query=workflow%3A%22Publish+Docker%22)
+
 Provision Let's Encrypt TLS certificates using dns-01 challenge for Cloudflare and save them into a Kubernetes secret.
 
 ### Environment variables
@@ -96,7 +98,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: cf-letsencrypt
-        image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
+        image: ghcr.io/adrianchifor/k8s-cf-letsencrypt:latest
         imagePullPolicy: Always
         resources:
           requests:
@@ -162,7 +164,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: cf-letsencrypt
-            image: quay.io/adrianchifor/k8s-cf-letsencrypt:master
+            image: ghcr.io/adrianchifor/k8s-cf-letsencrypt:latest
             imagePullPolicy: Always
             resources:
               requests:
